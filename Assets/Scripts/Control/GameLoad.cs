@@ -12,7 +12,6 @@ namespace Control
         {
             Common.SustainCoroutine sustain = Common.SustainCoroutine.Instance; //º”‘ÿ–≠≥Ã
             SceneChangeControl changeControl = SceneChangeControl.Instance;
-            Task.AsynTaskControl.Instance.ReLoadTask();
             Application.targetFrameRate = -1;
         }
     }
