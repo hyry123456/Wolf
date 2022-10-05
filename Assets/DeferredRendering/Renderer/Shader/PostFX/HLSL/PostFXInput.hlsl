@@ -204,9 +204,10 @@ float3 GetBulkLight(float depth, float2 screenUV, float3 interpolatedRay){
 		: LinearEyeDepth(depth, _ZBufferParams);
 
     float3 worldPos = GetWorldPos(depth, screenUV);
-    float3 startPos = _WorldSpaceCameraPos + _ProjectionParams.y * interpolatedRay;
+    // float3 startPos = _WorldSpaceCameraPos + _ProjectionParams.y * interpolatedRay;
+    float3 startPos = GetWorldPos(1, screenUV);
 
-    float3 direction = normalize(worldPos - startPos);
+    float3 direction = float3(0, 0, 1);
     float dis = length(worldPos - startPos);
 
     float m_length = min(_BulkLightCheckMaxDistance, dis);

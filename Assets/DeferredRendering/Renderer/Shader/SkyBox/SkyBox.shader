@@ -1,4 +1,4 @@
-Shader "Lapu/Skybox"
+Shader "Defferer/Skybox"
 {
 	Properties
 	{

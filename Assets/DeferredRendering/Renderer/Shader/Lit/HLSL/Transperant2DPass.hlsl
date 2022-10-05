@@ -30,7 +30,7 @@ struct Varyings2D
 	UNITY_VERTEX_INPUT_INSTANCE_ID
 };
 
-#define _2D_Normal float3(0, 0, 1)
+#define _2D_Normal float3(0, 0, -1)
 
 Varyings2D LitPassVertex (Attributes2D input) {
 	Varyings2D output = (Varyings2D)0;

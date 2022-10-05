@@ -57,6 +57,26 @@ Shader "Defferer/GBufferReady2D"
 			ENDHLSL
         }
 
+		Pass {
+			Tags {
+				"LightMode" = "ShadowCaster"
+			}
+
+			ColorMask 0
+			Cull Off
+			
+			HLSLPROGRAM
+			#pragma target 3.5
+			#pragma shader_feature _ _SHADOWS_CLIP _SHADOWS_DITHER
+			#pragma shader_feature _CLIPPING
+			#pragma multi_compile _ LOD_FADE_CROSSFADE
+			#pragma multi_compile_instancing
+			#pragma vertex ShadowCasterPassVertex
+			#pragma fragment ShadowCasterPassFragment
+			#include "../Common/ShadowCasterPass.hlsl"
+			ENDHLSL
+		}
+
 		Pass{		//透明渲染Pass
 			Tags {
                 "LightMode" = "FowardShader"

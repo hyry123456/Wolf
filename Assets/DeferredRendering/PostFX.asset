@@ -23,8 +23,8 @@ MonoBehaviour:
   bulkLight:
     useBulkLight: 1
     shrinkRadio: 100
-    circleCount: 10
-    scatterRadio: 0
+    circleCount: 32
+    scatterRadio: 0.27
     checkDistance: 30
   bloom:
     maxIterations: 6
