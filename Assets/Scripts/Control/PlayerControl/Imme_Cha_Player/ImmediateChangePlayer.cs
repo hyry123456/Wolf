@@ -121,12 +121,11 @@ namespace Control {
         {
             if (!isEnableInput) return;
             float horizontal = MyInput.Instance.GetAsis(horizontalName);
-            float vertical = MyInput.Instance.GetAsis("Vertical");
             bool jump = MyInput.Instance.GetButtonDown(jumpName);
             bool esc = MyInput.Instance.GetButtonDown("ESC");
             bool interacte = MyInput.Instance.GetButtonDown(interacteName);
-
-            motors[nowIndex]?.Climb(vertical);
+            
+            
             motors[nowIndex]?.Move(horizontal);
             if(horizontal != 0 && !jump )
             {
@@ -154,7 +153,6 @@ namespace Control {
             if (motors[nowIndex].OnGround())
             {
                 animates[nowIndex].SetBool("Down", false);
-                //animates[nowIndex].SetBool("Jump", false);
             }
             if (esc)
                 UIExtentControl.Instance?.ShowOrClose();
