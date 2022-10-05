@@ -156,6 +156,11 @@ namespace DefferedRender
 				RotateTexture(sourceId);
 			}
 
+            if (settings.WaveSetting.isWave)
+            {
+				WaveTexture(sourceId);
+			}
+
 			if (settings.BulkLighting.useBulkLight)
             {
 				DrawBulkLight(sourceId);
@@ -260,6 +265,10 @@ namespace DefferedRender
 			buffer.ReleaseTemporaryRT(bulkLightTargetTexId);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="source"></param>
 		private void WaveTexture(int source)
         {
 			RenderTextureFormat format = useHDR ?
