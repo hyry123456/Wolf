@@ -13,11 +13,12 @@ public class MapFollowCamera : MonoBehaviour
     public float speedY = 0;
     private Vector3 preCameraPos = Vector3.zero;
 
-    private void Start()
+    private void Awake()
     {
         if (Camera.main == null) return;
         preCameraPos = Camera.main.transform.position;
     }
+
 
     private void Update()
     {

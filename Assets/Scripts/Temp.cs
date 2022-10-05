@@ -8,7 +8,8 @@ public class Temp : MonoBehaviour
 
     void Start()
     {
-        string strs = "你好\n我是马云\n我很有钱";
-        UI.DumbShowManage.Instance.ShowDumbText(strs, null);
+        //string strs = "你好\n我是马云\n我很有钱";
+        //UI.DumbShowManage.Instance.ShowDumbText(strs, null);
+        UI.DumbShowManage.Instance.ShowDumbText(TextLoad.Instance.GetOneDumbText(0), null);
     }
 }

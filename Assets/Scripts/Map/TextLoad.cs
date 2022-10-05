@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class TextLoad : MonoBehaviour
 {
-    private TextLoad instance;
-    public TextLoad Instance => instance;
+    private static TextLoad instance;
+    public static TextLoad Instance => instance;
     [SerializeField]
     List<string> strings;
     private string pathPrefab = Application.streamingAssetsPath + "/Text/";
@@ -15,9 +15,6 @@ public class TextLoad : MonoBehaviour
     private void Awake()
     {
         instance = this;
-    }
-    void Start()
-    {
         strings = Common.FileReadAndWrite.
             ReadFileByAngleBrackets(pathPrefab + fileName);
     }

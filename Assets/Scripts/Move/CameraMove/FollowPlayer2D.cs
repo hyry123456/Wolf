@@ -43,7 +43,7 @@ namespace Motor
             nowCamera = GetComponent<Camera>();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (Control.ControlBase.Instance == null || !isFollow) return;
             Vector3 target = Control.ControlBase.Instance.GetPosition() + Vector3.up * moveY;
