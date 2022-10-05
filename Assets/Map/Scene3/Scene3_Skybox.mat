@@ -90,7 +90,7 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _StarsCutoff: 0.83
+    - _StarsCutoff: 0.88
     - _StarsFrequency: 1.06
     - _StarsSpeed: 4.8
     - _SunRadius: 0.07
@@ -110,6 +110,6 @@ Material:
     - _MoonColor: {r: 1, g: 0, b: 0, a: 1}
     - _NightBottomColor: {r: 0, g: 0, b: 0, a: 1}
     - _NightTopColor: {r: 0, g: 0, b: 0, a: 1}
-    - _StarsSkyColor: {r: 0.7924528, g: 0, b: 0, a: 1}
+    - _StarsSkyColor: {r: 2, g: 0, b: 0, a: 1}
     - _SunColor: {r: 1, g: 0.5068552, b: 0.17254901, a: 1}
   m_BuildTextureStacks: []

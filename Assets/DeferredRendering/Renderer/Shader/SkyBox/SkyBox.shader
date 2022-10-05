@@ -16,7 +16,7 @@ Shader "Defferer/Skybox"
 		_StarsCutoff("Stars Cutoff",  Range(0, 1)) = 0.21
 		_StarsSpeed("Stars Move Speed",  Range(-10, 10)) = 0.3
 		_StarsFrequency("Star Frequency",  Range(0, 3)) = 2.3
-		_StarsSkyColor("Stars Sky Color", Color) = (0.0,1,0.5,1)
+		[HDR]_StarsSkyColor("Stars Sky Color", Color) = (0.0,1,0.5,1)
 
 		[Header(Cloud Settings)]
 		_Cloud("Cloud Texture", 2D) = "black" {}
@@ -53,44 +53,26 @@ Shader "Defferer/Skybox"
 		_HorizonLightNight("Night Horizon Light", Color) = (0, 0.08, 0.1,1)
 
 	}
-		SubShader
+	SubShader
+	{
+
+		HLSLINCLUDE
+			#include "../../ShaderLibrary/Common.hlsl"
+			#include "HLSL/SkyBoxPass.hlsl"
+		ENDHLSL
+
+		Pass 
 		{
+			HLSLPROGRAM
 
-			Tags { "RenderType" = "Opaque" }
+			#pragma vertex vert
+			#pragma fragment frag
 
-			HLSLINCLUDE
-				#include "../../ShaderLibrary/Common.hlsl"
-				#include "HLSL/SkyBoxPass.hlsl"
+			#pragma shader_feature MIRROR
+			#pragma shader_feature ADDCLOUD
+
 			ENDHLSL
-
-			Pass 
-			{
-				HLSLPROGRAM
-
-				#pragma vertex vert
-				#pragma fragment frag
-
-				#pragma shader_feature MIRROR
-				#pragma shader_feature ADDCLOUD
-
-				ENDHLSL
-			}
-
-			// Pass
-			// {
-			// 	CGPROGRAM
-			// 	#pragma vertex vert
-			// 	#pragma fragment frag
-			// 	#include "UnityCG.cginc"
-
-
-
-
-
-
-
-
-			// 	ENDCG
-			// }
 		}
+
+	}
 }

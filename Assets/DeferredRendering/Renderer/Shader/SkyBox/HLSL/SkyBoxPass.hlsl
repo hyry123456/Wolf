@@ -79,7 +79,7 @@ float4 frag(v2f input) : SV_Target
     cloudCol += saturate(smoothstep( _CloudCutoff, saturate(_CloudCutoff + 0.2), cloud * distort)) * 
         lerp(_CloudDayColor * 0.3, _CloudNightColor * 0.3, saturate(-direction.y * 0.5 + 0.5));
 
-    starsCol *= (1 - cloudCol);
+    starsCol *= (1.0 - cloudCol);
 
     float ypos = saturate(input.uv3D.y);
 
