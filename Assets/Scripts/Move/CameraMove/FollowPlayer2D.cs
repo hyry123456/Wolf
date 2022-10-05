@@ -1,20 +1,42 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 
-namespace Control
+namespace Motor
 {
-    /// <summary> /// 2DÉãÏñ»ú¸úËæÖ÷½Ç£¬ÉãÏñ»úµÄ¸úËæÊÇÒÔÒ»¸öËÙ¶È¸úËæµÄ  /// </summary>
+    /// <summary> /// 2Dæ‘„åƒæœºè·Ÿéšä¸»è§’ï¼Œæ‘„åƒæœºçš„è·Ÿéšæ˜¯ä»¥ä¸€ä¸ªé€Ÿåº¦è·Ÿéšçš„  /// </summary>
     public class FollowPlayer2D : MonoBehaviour
     {
-        Camera nowCamera;   //µ±Ç°µÄ¿ØÖÆÉãÏñ»ú
-        /// <summary>  /// ÉãÏñ»úµÄÄ¿±êµã¾àÖ÷½ÇÍ·²¿µÄ¸ß¶È    /// </summary>
+        private static FollowPlayer2D instance;
+        public static FollowPlayer2D Instance => instance;
+
+        Camera nowCamera;   //å½“å‰çš„æ§åˆ¶æ‘„åƒæœº
+        /// <summary>  /// æ‘„åƒæœºçš„ç›®æ ‡ç‚¹è·ä¸»è§’å¤´éƒ¨çš„é«˜åº¦    /// </summary>
         [SerializeField]
         float moveY = 5;
-        /// <summary> /// ÉãÏñ»úÏà¶ÔÄ¿±êµã×î´óµÄÆ«ÒÆÖµ    /// </summary>
+        /// <summary> /// æ‘„åƒæœºç›¸å¯¹ç›®æ ‡ç‚¹æœ€å¤§çš„åç§»å€¼    /// </summary>
         float offsetDistance = 3;
-        /// <summary>    /// Ã¿ÃëµÄ½Ó½ü±ÈÀı£¬ÉèÎª0.5¾ÍÊÇÃ¿ÃëËõĞ¡Ò»°ë    /// </summary>
+        /// <summary>    /// æ¯ç§’çš„æ¥è¿‘æ¯”ä¾‹ï¼Œè®¾ä¸º0.5å°±æ˜¯æ¯ç§’ç¼©å°ä¸€åŠ    /// </summary>
         [SerializeField, Range(0.0001f, 1f)]
         float focusCentering = 0.5f;
+
+
+        bool isFollow = false;
+        public void BeginFollow()
+        {
+            isFollow = true;
+        }
+        public void StopFollow()
+        {
+            isFollow = false;
+        }
+
+        private void Awake()
+        {
+            if (instance != null)
+                Debug.LogError("å¤šä¸ªæ‘„åƒæœº");
+            instance = this;
+            isFollow = true;
+        }
 
         private void Start()
         {
@@ -23,9 +45,9 @@ namespace Control
 
         private void Update()
         {
-            if (ControlBase.Instance == null) return;
-            Vector3 target = ControlBase.Instance.GetPosition() + Vector3.up * moveY;
-            target.z = -10; //ÉãÏñ»úÄ¬ÈÏ²ÎÊı
+            if (Control.ControlBase.Instance == null || !isFollow) return;
+            Vector3 target = Control.ControlBase.Instance.GetPosition() + Vector3.up * moveY;
+            target.z = -10; //æ‘„åƒæœºé»˜è®¤å‚æ•°
             Vector3 now = nowCamera.transform.position;
             float distance = Vector3.Distance(now, target);
             float t = 1.0f - focusCentering * Time.unscaledDeltaTime;

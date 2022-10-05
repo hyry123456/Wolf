@@ -329,7 +329,16 @@ namespace DefferedRender
 			isWave = false,
 		};
 		public WaveTexture WaveSetting => waveSettings;
-
+		/// <summary>/// 启动波动主纹理/// </summary>
+		public void BeginWave()
+        {
+			waveSettings.isWave = true;
+        }
+		/// <summary>/// 关闭波动主纹理/// </summary>
+		public void EndWave()
+		{
+			waveSettings.isWave = false;
+		}
 
 
 		Material material;

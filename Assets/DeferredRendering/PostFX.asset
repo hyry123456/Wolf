@@ -98,3 +98,7 @@ MonoBehaviour:
   rotateSetting:
     rotateRadio: 0
     isRotate: 0
+  waveSettings:
+    waveSize: 0.001
+    waveLength: 500
+    isWave: 0
