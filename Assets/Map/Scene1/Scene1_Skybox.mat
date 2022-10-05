@@ -7,13 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 2DCommom1
-  m_Shader: {fileID: 4800000, guid: 7ce2e9b994f7ba74193b398e9231d08e, type: 3}
-  m_ShaderKeywords: _NORMAL_MAP
+  m_Name: Scene1_Skybox
+  m_Shader: {fileID: 4800000, guid: 63b703dce9d4f634f98fe16343ba9e81, type: 3}
+  m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -23,11 +23,11 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
+    - _Cloud:
+        m_Texture: {fileID: 2800000, guid: 5b0ec9b3f0defa14d9176564d67445b3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _DetailMap:
+    - _DetailAlbedoMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -47,15 +47,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MaskMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _NormalMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -67,34 +59,57 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Stars:
+        m_Texture: {fileID: 2800000, guid: 3312039daa5756144b86f183d1adef4a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
-    - _Clipping: 0
+    - _CloudCutoff: 0.45
+    - _CloudFrequency: 0.06
+    - _CloudNoiseScale: 0.6
+    - _CloudSpeed: 3
     - _Cutoff: 0.5
-    - _DetailAlbedo: 1
-    - _DetailMapToggle: 0
     - _DetailNormalMapScale: 1
-    - _DetailNormalScale: 1
-    - _DetailSmoothness: 1
+    - _DistortScale: 0.1
+    - _DistortionSpeed: -0.3
     - _DstBlend: 0
-    - _Fresnel: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _MaskMapToggle: 0
+    - _HorizonBrightness: 0.42
+    - _HorizonHeight: 0.2
+    - _HorizonIntensity: 2
     - _Metallic: 0
+    - _MidLightIntensity: 10
     - _Mode: 0
-    - _NormalMapToggle: 1
-    - _NormalScale: 1
+    - _MoonOffset: 1
+    - _MoonRadius: 0.07
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _StarsCutoff: 0.21
+    - _StarsFrequency: 2.3
+    - _StarsSpeed: 0.3
+    - _SunRadius: 0.07
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
+    - _CloudDayColor: {r: 1, g: 1, b: 1, a: 1}
+    - _CloudNightColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DayBottomColor: {r: 0.1638305, g: 0.40667444, b: 0.49056602, a: 1}
+    - _DayTopColor: {r: 0, g: 0.8227072, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _HorizonColorDay: {r: 1, g: 1, b: 1, a: 1}
+    - _HorizonColorNight: {r: 0, g: 0.29421815, b: 0.29803923, a: 1}
+    - _HorizonLightDay: {r: 1, g: 1, b: 1, a: 1}
+    - _HorizonLightNight: {r: 0.48052686, g: 0.6415094, b: 0.63562226, a: 1}
+    - _MoonColor: {r: 1, g: 1, b: 1, a: 1}
+    - _NightBottomColor: {r: 0.029423276, g: 0.15225028, b: 0.1792453, a: 1}
+    - _NightTopColor: {r: 0.2960484, g: 0.5283019, b: 0.5081217, a: 1}
+    - _StarsSkyColor: {r: 0, g: 1, b: 0.5, a: 1}
+    - _SunColor: {r: 1, g: 0.5068552, b: 0.17254901, a: 1}
   m_BuildTextureStacks: []
