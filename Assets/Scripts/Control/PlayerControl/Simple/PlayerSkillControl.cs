@@ -21,6 +21,7 @@ namespace Control
 
         private void FixedUpdate()
         {
+            if (skillManage.Skills == null) return;
             string namePrefit = "Alpha";
             int index = -1;
             for (int i = 1; i <= 4; i++)
