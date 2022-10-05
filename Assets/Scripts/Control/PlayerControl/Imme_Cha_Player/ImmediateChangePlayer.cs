@@ -142,8 +142,10 @@ namespace Control {
                 animates[nowIndex].SetBool("Jump", true);
 
             }
-            if (Rbs[nowIndex].velocity.y < 0 && !motors[nowIndex].OnGround())
-            {
+            //Debug.Log(Rbs[nowIndex].velocity.y);
+            if (Rbs[nowIndex].velocity.y <= 0 && !motors[nowIndex].OnGround())
+            {   
+
                 animates[nowIndex].SetBool("Jump", false);
                 animates[nowIndex].SetBool("Down", true);
                 //Debug.LogError("ÏÂÂä¶¯»­²¥·Å");
