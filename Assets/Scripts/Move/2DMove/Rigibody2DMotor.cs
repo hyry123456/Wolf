@@ -62,6 +62,7 @@ namespace Motor
 
         private void FixedUpdate()
         {
+
             //更新数据，用来对这一个物理帧的数据进行更新之类的
             UpdateState();
 
@@ -79,8 +80,8 @@ namespace Motor
             velocity = Vector2.ClampMagnitude(velocity, 40f);
 
             body2D.velocity = velocity;
-
             ClearState();
+
         }
 
 
@@ -209,6 +210,7 @@ namespace Motor
         void EvaluateCollision(Collision2D collision)
         {
             onGround = false;
+            contactNormal = connectionVelocity = Vector2.zero;
             float minDot = minGroundDot;
             for (int i = 0; i < collision.contactCount; i++)
             {
@@ -258,7 +260,7 @@ namespace Motor
         void ClearState()
         {
             //onGround = false;
-            contactNormal = connectionVelocity = Vector2.zero;
+            //contactNormal = connectionVelocity = Vector2.zero;
             preConnectObj = connectObj;
             connectObj = null;
         }
