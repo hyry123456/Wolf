@@ -1812,6 +1812,10 @@ MonoBehaviour:
   dieY: -100
   animates: []
   anmiGO: {fileID: 0}
+  offset:
+  - 0
+  - 0
+  - 1
   horizontalName: Horizontal
   jumpName: Jump
   interacteName: Interaction

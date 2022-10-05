@@ -16,6 +16,7 @@ namespace Control {
         public Animator[] animates;
         public GameObject anmiGO;      //为骨骼动画准备的GO；
         private Rigidbody2D[] Rbs;
+        public float[] offset;
 
         [SerializeField]
         string horizontalName = "Horizontal";
@@ -101,7 +102,9 @@ namespace Control {
                         effectControls[nowIndex].End();
                         canChangeObject[i].SetActive(true);
                         effectControls[i].Begin();
-                        canChangeObject[i].transform.position = canChangeObject[nowIndex].transform.position;
+                        Vector3 newPos = canChangeObject[nowIndex].transform.position; 
+                        newPos.y += offset[i];      //加上Y的偏移值，作为防止高度差
+                        canChangeObject[i].transform.position = newPos;
                         nowIndex = i;
                         drawData.beginPos = canChangeObject[nowIndex].transform.position;
                         ParticleNoiseFactory.Instance.DrawShape(drawData);
