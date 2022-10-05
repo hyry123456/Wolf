@@ -97,8 +97,8 @@ MonoBehaviour:
     lowQuality: 0
   rotateSetting:
     rotateRadio: 0
-    isRotate: 1
+    isRotate: 0
   waveSettings:
-    waveSize: 0.0001
+    waveSize: 0.001
     waveLength: 500
     isWave: 0
