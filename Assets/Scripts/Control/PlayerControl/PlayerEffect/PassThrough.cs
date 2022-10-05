@@ -59,7 +59,6 @@ public class PassThrough : PlayerEffectBase
     public override void Begin()
     {
         List<GameObject> games;
-        Debug.Log("Begin");
         games = ObjectClassify.Instance.allObjects[thisPassTags];
         showLists = new List<SpriteRenderer>();
         for (int i = 0; i < games.Count; i++)
