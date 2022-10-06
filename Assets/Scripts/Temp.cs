@@ -12,7 +12,7 @@ public class Temp : MonoBehaviour
         //{
         //    //Common.SustainCoroutine.Instance.AddCoroutine(Show, false);
         //});
-        EndUI.Instance.ShowEnd(TextLoad.Instance.GetOneDumbText(18));
+        //EndUI.Instance.ShowEnd(TextLoad.Instance.GetOneDumbText(18));
     }
 
     bool Show()
@@ -23,7 +23,7 @@ public class Temp : MonoBehaviour
             UI.DumbShowManage.Instance.ShowDumbText(TextLoad.Instance.GetOneDumbText(index), () =>
             {
                 Common.SustainCoroutine.Instance.AddCoroutine(Show, false);
-            });
+            }, new Common.INonReturnAndNonParam[30]);
         }
         return true;
     }

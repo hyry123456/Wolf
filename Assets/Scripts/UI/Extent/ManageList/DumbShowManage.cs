@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Common;
 
 namespace UI
 {
@@ -18,6 +19,8 @@ namespace UI
         private Common.INonReturnAndNonParam endBehavior;
 
         private List<string> strings;
+        /// <summary>/// 所有的委托/// </summary>
+        List<INonReturnAndNonParam> funtions;
         private Vector3 beginPos;
         private Text text;
         public DefferedRender.PostFXSetting fXSetting;
@@ -53,6 +56,11 @@ namespace UI
                 }
                 text.text = strings[0];
                 strings.RemoveAt(0);
+                if (funtions[0] != null)
+                {
+                    funtions[0]();
+                }
+                funtions.RemoveAt(0);
             }
         }
 
@@ -67,8 +75,10 @@ namespace UI
                 endBehavior();
         }
 
-        public void ShowDumbText(string strs, Common.INonReturnAndNonParam endBehavior)
+        public void ShowDumbText(string strs, Common.INonReturnAndNonParam endBehavior,
+            INonReturnAndNonParam[] funtions)
         {
+            this.funtions = new List<INonReturnAndNonParam>(funtions);
             gameObject.SetActive(true);
             this.endBehavior = endBehavior;
             Motor.FollowPlayer2D.Instance?.StopFollow();     //停止摄像机跟随主角

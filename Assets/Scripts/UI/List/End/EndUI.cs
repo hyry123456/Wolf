@@ -22,6 +22,7 @@ public class EndUI : MonoBehaviour
     {
         instance = this;
         text = GetComponent<Text>();
+        gameObject.SetActive(false);
     }
 
     private void OnDestroy()
@@ -49,7 +50,8 @@ public class EndUI : MonoBehaviour
 
         Motor.FollowPlayer2D.Instance?.StopFollow();     //Í£Ö¹ÉãÏñ»ú¸úËæÖ÷½Ç
         beginPos = Camera.main.transform.position;
-        Camera.main.transform.position = transform.position + -Vector3.forward * 10;
+        Camera.main.transform.position = transform.position + -Vector3.forward * 10
+            + Vector3.up * 10;
         Control.PlayerControl.Instance?.DisableInput();     //Í£Ö¹ÊäÈë
         fXSetting.BeginWave();
         nowTime = 0;

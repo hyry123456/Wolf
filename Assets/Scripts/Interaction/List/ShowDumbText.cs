@@ -7,7 +7,8 @@ namespace Interaction
         public override void InteractionBehavior()
         {
             UI.DumbShowManage.Instance.ShowDumbText(
-                TextLoad.Instance.GetOneDumbText(textIndex), null);
+                TextLoad.Instance.GetOneDumbText(textIndex), null,
+                new Common.INonReturnAndNonParam[30]);
         }
     }
 }

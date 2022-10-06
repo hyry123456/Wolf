@@ -23,6 +23,8 @@ namespace Interaction
         GameObject origin;
         UI.InteracteUI interacteUI;
 
+        protected bool beginShowUI = true;
+
         public float upOffset = 1.3f;
 
         /// <summary>
@@ -33,14 +35,18 @@ namespace Interaction
             if(origin == null)
                 origin = Resources.Load<GameObject>("UI/InteracteRemain");
 
-            interacteUI = (UI.InteracteUI)Common.SceneObjectPool.
-                Instance.GetObject("InteracteRemain", origin,
-                transform.position + Vector3.up * upOffset, Quaternion.identity);
+            if (beginShowUI)
+            {
+                interacteUI = (UI.InteracteUI)Common.SceneObjectPool.
+                    Instance.GetObject("InteracteRemain", origin,
+                    transform.position + Vector3.up * upOffset, Quaternion.identity);
+            }
+
         }
 
         protected virtual void OnDisable()
         {
-            interacteUI.CloseObject();
+            interacteUI?.CloseObject();
         }
 
         /// <summary>        /// 该交互行为需要干的事情        /// </summary>

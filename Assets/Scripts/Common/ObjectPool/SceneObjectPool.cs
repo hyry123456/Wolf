@@ -109,6 +109,7 @@ namespace Common
         /// <param name="objectPoolBase">被管理的物体</param>
         public void RecyclingObjects(ObjectPoolBase objectPoolBase)
         {
+            if (objectPoolBase == null) return;
             objectPoolBase.gameObject.SetActive(false);
             PoolingList<ObjectPoolBase> list;
             if(objectPools.TryGetValue(objectPoolBase.objectName, out list))
