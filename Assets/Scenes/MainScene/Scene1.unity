@@ -3229,7 +3229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83f28572c1b986c42aac622173897254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetScene: Scene2
+  targetScene: AnimateScene1
   fXSetting: {fileID: 11400000, guid: c37d4c811b7c23842bf94550434951b9, type: 2}
 --- !u!1 &665871616
 GameObject:
@@ -6440,6 +6440,10 @@ PrefabInstance:
     - target: {fileID: 2389999306741068011, guid: 2f6619e9a201cf34d95c5d5a83599629, type: 3}
       propertyPath: m_SortingLayerID
       value: -2011881221
+      objectReference: {fileID: 0}
+    - target: {fileID: 2578657998477092580, guid: 2f6619e9a201cf34d95c5d5a83599629, type: 3}
+      propertyPath: maxSP
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2578657998477092580, guid: 2f6619e9a201cf34d95c5d5a83599629, type: 3}
       propertyPath: runSpeed
