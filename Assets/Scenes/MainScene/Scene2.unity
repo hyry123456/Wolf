@@ -552,7 +552,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2011881221
-  m_SortingLayer: 3
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 1.5006862, y: 0.99750006, z: 0}
@@ -1227,6 +1227,7 @@ GameObject:
   - component: {fileID: 574929048}
   - component: {fileID: 574929047}
   - component: {fileID: 574929046}
+  - component: {fileID: 574929049}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1299,6 +1300,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &574929049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574929045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f690e3c36c9d8e48a19981895733730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveY: 2
+  focusCentering: 0.5
 --- !u!4 &660140868 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7411488861763592420, guid: b40eae8eafa51b048adf66043740eecc, type: 3}
@@ -1993,7 +2008,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1963520343
-  m_SortingLayer: 2
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 1.5006862, y: 0.5, z: 0}
@@ -3670,7 +3685,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1900979729
-  m_SortingLayer: 1
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -5004,7 +5019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 990570482010143233, guid: 3b471ac619ebef74ba331be81b034ff5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.86
       objectReference: {fileID: 0}
     - target: {fileID: 990570482010143233, guid: 3b471ac619ebef74ba331be81b034ff5, type: 3}
       propertyPath: m_LocalPosition.z
