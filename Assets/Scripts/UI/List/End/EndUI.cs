@@ -10,6 +10,8 @@ public class EndUI : MonoBehaviour
 
     public DefferedRender.PostFXSetting fXSetting;
 
+    Common.INonReturnAndNonParam end;
+
 
     public float moveSpeed = 1;
     public float waitTime = 10;
@@ -43,7 +45,7 @@ public class EndUI : MonoBehaviour
         }
     }
 
-    public void ShowEnd(string str)
+    public void ShowEnd(string str, Common.INonReturnAndNonParam end)
     {
         text.text = str;
         beginPos = Camera.main.transform.position;
@@ -56,10 +58,13 @@ public class EndUI : MonoBehaviour
         fXSetting.BeginWave();
         nowTime = 0;
         gameObject.SetActive(true);
+        this.end = end;
     }
 
     private void OnEnd()
     {
+        if (end != null)
+            end();
         gameObject.SetActive(false);
         Control.PlayerControl.Instance?.EnableInput();     //ø™∆Ù ‰»Î
         Camera.main.transform.position = beginPos;
