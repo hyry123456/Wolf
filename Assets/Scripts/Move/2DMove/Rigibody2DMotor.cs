@@ -24,6 +24,7 @@ namespace Motor
         public int maxAirJumps = 2;
         /// <summary>   /// 在空中移动的加速度 /// </summary>
         private int airJumps = 0;
+
         [SerializeField]
         /// <summary>    /// 是否在地面上    /// </summary>
         private bool onGround = false;
@@ -33,6 +34,18 @@ namespace Motor
         public float maxGroundAngle = 25f;
         private float minGroundDot = 0;
 
+        /// <summary>
+        /// 贴地检测用的距离
+        /// </summary>
+        [SerializeField]
+        float probeDistance = 1;
+        /// <summary>
+        /// 贴地检测的层
+        /// </summary>
+        [SerializeField]
+        LayerMask probeMask = -1;
+
+
         /// <summary> /// 接触面的法线，这个法线是平均法线，用来确定移动面的方向以及跳跃的方向 /// </summary>
         Vector2 contactNormal;
 
@@ -40,14 +53,17 @@ namespace Motor
         Info.CharacterInfo characterInfo;
         /// <summary>  /// 接触面的世界坐标，用来判断接触面的移动距离，等值调动物体移动 /// </summary>
         Vector3 connectionWorldPostion;
+        [SerializeField]
+        private bool isClimb;
 
-        /// <summary>  /// 攀爬检测的偏移数值，x是前方缩放，y是向上偏移,z是添加的力的大小/// </summary>
-        [SerializeField]
-        Vector3 climbData = Vector3.one;
-        [SerializeField]
-        /// <summary>  /// 可以进行攀爬的层  /// </summary>
-        LayerMask climbMask;
-        private bool preClimbState;
+        /// <summary>
+        /// 用来确定此时离开地面的时间(stepSinceLastGround)，在地面时会变为0，
+        /// 不在时会逐物理帧刷新
+        /// </summary>
+        int stepSinceLastGround = 0;
+        /// <summary>    /// 用来确定跳跃的时间，当跳跃时会归零，在物理帧时逐帧增加    /// </summary>
+        int stepSinceLastJump = 0;
+
 
 
         void Awake()
@@ -62,14 +78,12 @@ namespace Motor
 
         private void FixedUpdate()
         {
-
             //更新数据，用来对这一个物理帧的数据进行更新之类的
             UpdateState();
 
             //确定在空中还是在地面
             CheckTransing();
             AdjustVelocity();
-            ClimbCheck();
             if (desiredJump)
             {
                 Jump();
@@ -136,20 +150,33 @@ namespace Motor
         void UpdateState()
         {
             velocity = body2D.velocity;
+            stepSinceLastGround ++;
+            stepSinceLastJump++;
             //当不在地面时执行贴近地面方法
-            if (onGround/*在地上*/)
+            if (onGround/*在地上*/ || SnapToGround())
             {
                 airJumps = 0;
+                stepSinceLastGround = 0;
                 contactNormal.Normalize();
             }
             else
-                contactNormal = Vector3.up;
-
+                contactNormal = Vector2.up;
 
             if (connectObj && connectObj.tag == "CheckMove")
             {
                 UpdateConnectionState();
             }
+
+            //if(!isClimb)
+            //{
+            //    body2D.simulated = true;
+            //}
+            //else
+            //{
+            //    body2D.simulated = false;
+            //    Vector2 speed = body2D.velocity; speed.y = 0;
+            //    body2D.velocity = speed;
+            //}
         }
 
         void UpdateConnectionState()
@@ -194,6 +221,7 @@ namespace Motor
             velocity += jumpDirction * jumpSpeed;
             //跳跃计数
             airJumps++;
+            stepSinceLastJump = 0;
         }
 
         /// <summary>  /// 接触退出时加载一次接触面法线  /// </summary>
@@ -202,9 +230,22 @@ namespace Motor
             EvaluateCollision(collision);
         }
 
-        private void OnCollisionStay2D(Collision2D collision)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
             EvaluateCollision(collision);
+        }
+
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if(collision.tag == "Climb")
+                isClimb = true;
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.tag == "Climb")
+                isClimb = false;
         }
 
         void EvaluateCollision(Collision2D collision)
@@ -254,13 +295,13 @@ namespace Motor
             float newX = Mathf.MoveTowards(currentX, desiredVelocity.x, maxSpeedChange);
             float newY = Mathf.MoveTowards(currentY, desiredVelocity.y, maxSpeedChange);
             velocity += xAixs * (newX - currentX) + yAxis * (newY - currentY);
+            if (isClimb)
+                velocity.y += -Physics.gravity.y * Time.fixedDeltaTime;
         }
 
         /// <summary>  /// 清除数据，把一些数据归为初始化  /// </summary>
         void ClearState()
         {
-            //onGround = false;
-            //contactNormal = connectionVelocity = Vector2.zero;
             preConnectObj = connectObj;
             connectObj = null;
         }
@@ -271,41 +312,8 @@ namespace Motor
             return (direction - normal * Vector2.Dot(direction, normal)).normalized;
         }
 
-        /// <summary>  
-        /// 攀爬检测，对可以进行攀爬的物体，只是提供一个向上的拉力而已
-        /// </summary>
-        void ClimbCheck()
-        {
-            Vector2 beginPos;
-            beginPos = transform.position;
-            beginPos += ((transform.right.x >= 0) ? Vector2.right : Vector2.left) * climbData.x;
-            beginPos += Vector2.up * climbData.y;
-            //Debug.DrawLine(beginPos, beginPos - Vector2.down * 0.3f);
 
-            RaycastHit2D hit;
-            hit = Physics2D.Raycast(beginPos, Vector2.down, 0.3f, climbMask);
-            if (hit.collider != null)
-            {
-                if (Vector2.Dot(hit.normal, Vector2.up) > minGroundDot && !onGround)
-                {
-                    preClimbState = true;
-                }
-                else
-                    preClimbState = false;
-            }
-            else
-            {
-                if(!onGround && preClimbState)
-                {
-                    velocity += Vector2.up * climbData.z;
-                }
-                preClimbState = false;
-            }
-        }
-
-        /// <summary>       
-        /// 旋转模型
-        /// </summary>
+        /// <summary>    /// 旋转模型     /// </summary>
         void Rotate()
         {
             //旋转朝向的目标点
@@ -322,7 +330,6 @@ namespace Motor
         {
             desiredVelocity = Vector2.right * horizontal;
             desiredVelocity = desiredVelocity * characterInfo.runSpeed;
-            
         }
 
         public override void DesireJump()
@@ -334,5 +341,58 @@ namespace Motor
         {
             return onGround;
         }
+
+        public override void Climb(float vertical)
+        {
+            if (isClimb)
+            {
+                Vector3 pos = transform.position;
+                pos.y += vertical * Time.fixedDeltaTime * characterInfo.walkSpeed;
+                transform.position = pos;
+            }
+        }
+
+        /// <summary>
+        /// 用于贴近地面用的方法，减少移动时会飞出去的效果
+        /// </summary>
+        /// <returns>用来配合一些地面检测使用，因此有返回值</returns>
+        bool SnapToGround()
+        {
+            //贴地行为只进行一次，同时用跳跃时间避免跳跃时贴地
+            if (stepSinceLastGround > 1 || stepSinceLastJump <= 2)
+            {
+                return false;
+            }
+            float speed = velocity.magnitude;
+
+
+            RaycastHit2D hit;
+            hit = Physics2D.Raycast(body2D.position, Vector2.down, probeDistance, probeMask);
+            if (hit.collider == null)
+                return false;
+
+            float upDot = Vector2.Dot(Vector2.up, hit.normal);
+            //如果射中的面不能作为可以站立的面，就不进行贴近
+            if (upDot < minGroundDot)
+                return false;
+
+
+            contactNormal = hit.normal;
+
+            //确定速度在法线上的大小
+            float dot = Vector2.Dot(velocity, hit.normal);
+            //保证只有速度朝上时才会往下压，不会减少下落速度
+            if (dot > 0)
+            {
+                //根据速度的大小往平面上压
+                velocity = (velocity - hit.normal * dot).normalized * speed;
+            }
+            else
+            {
+                velocity = (velocity + hit.normal * dot).normalized * speed;
+            }
+            return true;
+        }
+
     }
 }

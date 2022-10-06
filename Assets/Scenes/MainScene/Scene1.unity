@@ -4271,13 +4271,8 @@ GameObject:
   - component: {fileID: 1994209913}
   - component: {fileID: 1994209914}
   m_Layer: 0
-<<<<<<< HEAD
-  m_Name: Square
-  m_TagString: Climb
-=======
   m_Name: xpA
   m_TagString: Untagged
->>>>>>> 3ad9576102a6803e47d712ac454905bb04b0f1ef
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4408,25 +4403,7 @@ Tilemap:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
-  m_GameObject: {fileID: 2011777164}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.9, y: 8.3812, z: 0}
-  m_LocalScale: {x: 1, y: 22.748789, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &2011777168
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2011777164}
-=======
   m_GameObject: {fileID: 2131431242}
->>>>>>> 3ad9576102a6803e47d712ac454905bb04b0f1ef
   m_Enabled: 1
   m_Tiles: {}
   m_AnimatedTiles: {}
